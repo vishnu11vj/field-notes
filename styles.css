@@ -1,0 +1,287 @@
+/* ============================================
+   Field Notes — a quiet habit ledger
+   Design tokens
+   ============================================ */
+:root {
+  /* Color */
+  --paper: #f1ece0;
+  --paper-raised: #f8f4ea;
+  --ink: #232a26;
+  --moss-100: #dde4d2;
+  --moss-300: #aec79a;
+  --moss-500: #4f6f52;
+  --moss-700: #2f4730;
+  --clay: #c1654a;
+  --clay-soft: #e3b6a6;
+  --line: #d9d0bd;
+  --muted: #6f6856;
+
+  /* Type */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  /* Layout */
+  --radius: 6px;
+  --radius-lg: 10px;
+  --max-w: 760px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+
+/* ---------- Header ---------- */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+}
+
+.masthead h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.1rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+
+.masthead p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 38ch;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper-raised);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.btn:hover { background: var(--moss-700); }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { background: var(--moss-100); border-color: var(--moss-300); }
+
+/* ---------- Stats strip ---------- */
+.stats {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.stats strong {
+  color: var(--moss-700);
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+/* ---------- Habit list ---------- */
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.habit {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 18px;
+  align-items: center;
+}
+
+.habit-name-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  grid-column: 1 / -1;
+}
+
+.leaf {
+  flex: none;
+  color: var(--moss-500);
+}
+
+.habit-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  flex: 1;
+}
+
+.streaks {
+  display: flex;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.streaks b { color: var(--clay); font-size: 0.92rem; }
+
+.habit-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px 6px;
+  border-radius: var(--radius);
+  line-height: 1;
+}
+.icon-btn:hover { color: var(--clay); background: var(--moss-100); }
+.icon-btn:focus-visible { outline: 2px solid var(--clay); outline-offset: 1px; }
+
+.mark-done {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--moss-500);
+  background: transparent;
+  color: var(--moss-700);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.mark-done:hover { background: var(--moss-500); color: var(--paper-raised); }
+.mark-done.is-done {
+  background: var(--moss-500);
+  color: var(--paper-raised);
+}
+.mark-done:focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+
+/* ---------- Growth strip (heatmap) ---------- */
+.strip-wrap {
+  grid-column: 1 / -1;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  gap: 3px;
+  width: max-content;
+}
+
+.cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: var(--moss-100);
+}
+.cell[data-level="1"] { background: var(--moss-300); }
+.cell[data-level="2"] { background: var(--moss-500); }
+.cell[data-level="3"] { background: var(--moss-700); }
+
+.cell.is-today {
+  box-shadow: 0 0 0 1.5px var(--clay);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 1.5px var(--clay); }
+  50% { box-shadow: 0 0 0 2.5px var(--clay-soft); }
+}
+
+/* ---------- Empty state ---------- */
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-lg);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty h2 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+}
+.empty p { margin: 0 0 18px; font-size: 0.92rem; }
+
+/* ---------- New habit form ---------- */
+.new-habit-form {
+  margin-top: 18px;
+  display: flex;
+  gap: 8px;
+}
+.new-habit-form input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+.new-habit-form input:focus-visible {
+  outline: 2px solid var(--moss-500);
+  outline-offset: 1px;
+  border-color: var(--moss-500);
+}
+.hidden { display: none !important; }
+
+footer.note {
+  margin-top: 48px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 480px) {
+  .masthead { flex-direction: column; }
+  .habit { grid-template-columns: 1fr; }
+  .habit-actions { justify-self: start; }
+}
