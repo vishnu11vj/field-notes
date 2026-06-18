@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Notes — a habit ledger</title>
+  <meta name="description" content="A quiet, local-first habit tracker with a growth strip for each habit you tend." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead">
+      <div>
+        <h1>Field Notes</h1>
+        <p>A quiet ledger for the things you tend daily. Mark a day, watch the strip grow.</p>
+      </div>
+      <button class="btn" id="show-form-btn" type="button">+ New habit</button>
+    </header>
+
+    <div class="stats" id="stats" aria-live="polite"></div>
+
+    <ul class="habit-list" id="habit-list"></ul>
+
+    <div class="empty hidden" id="empty-state">
+      <h2>Nothing planted yet</h2>
+      <p>Add the first habit you'd like to keep an eye on.</p>
+      <button class="btn" id="empty-add-btn" type="button">Plant a habit</button>
+    </div>
+
+    <form class="new-habit-form hidden" id="new-habit-form">
+      <input
+        type="text"
+        id="new-habit-input"
+        placeholder="e.g. Read for 20 minutes"
+        maxlength="60"
+        autocomplete="off"
+        required
+      />
+      <button class="btn" type="submit">Add</button>
+      <button class="btn btn-ghost" type="button" id="cancel-form-btn">Cancel</button>
+    </form>
+
+    <footer class="note">Stored only in this browser — nothing is sent anywhere.</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
